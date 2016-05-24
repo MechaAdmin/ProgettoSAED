@@ -6,30 +6,66 @@
  */
 class servizio
 {
-
-
     /**
      * controlla_login
      *
      * @param string $email
      * @param string $password
-     * @return string Response string
+     * @return Array Response string
      */
     public function controlla_login($email, $password)
     {
-        include_once("../php/connessione.php");
-        //$con = mysqli_connect("localhost", "root", "", "Saed");
+        include_once("../home/php/connessione.php");
         $sql = "SELECT * FROM Utente WHERE email ='$email' AND password='$password'";
         $check = mysqli_fetch_array(mysqli_query($con, $sql));
-        if (isset($check)) {
-            $stato = "Login verificato!";
+        if(isset($check)) {
+            $stato = array("Login verificato!",$check["email"],$check["superuser"]);
         } else {
-            $stato = 'Email o password errati!';
+            $stato = array("Email o password errati!","","");
         }
 
         mysqli_close($con);
         return $stato;
     }
+    /**
+     * info_utente
+     *
+     * @param string $email
+     * @return Array Response string
+     */
+    public function info_utente($email)
+    {
+        include_once("../home/php/connessione.php");
+        $sql = "SELECT * FROM Utente WHERE email ='$email'";
+        $check = mysqli_fetch_array(mysqli_query($con, $sql));
+        $info = array($check["email"],$check["nome"],$check["cognome"],$check["indirizzo"],$check["citta"],$check["cap"],$check["superuser"]);
+
+        mysqli_close($con);
+        return $info;
+    }
+    /**
+     * aggiungi_piatto
+     *
+     * @param string $email
+     * @param string $descrizione
+     * @param string $prezzo
+     * @param string $immagine
+     * @return string Response string
+     */
+    public function aggiungi_piatto($nome,$descrizione,$prezzo,$immagine)
+    {
+        include_once("../home/php/connessione.php");
+        $sql = "INSERT INTO Prodotto (nome, descrizione, immagine,prezzo)VALUES ('$nome', '$descrizione','$immagine' ,'$prezzo')";
+
+        if (mysqli_query($con, $sql)) {
+            $info = "Prodotto aggiunto correttamente";
+        } else {
+            $info =  "Errore: " . $sql . "<br>" . mysqli_error($con);
+        }
+        mysqli_close($con);
+        return $info;
+    }
+
 
 }
 

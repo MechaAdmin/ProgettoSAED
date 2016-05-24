@@ -1,12 +1,10 @@
 <?php
-//	$wsdl="http://localhost/SAED/lib/cache/server.wsdl";
-//	$soap= new SoapClient($wsdl,array("trace" => 1, "exception" => 0));
-//	$response = $soap->controlla_login("r","r");
-//	echo $response;
 require_once('lib/class.phpwsdl.php');
 ini_set('soap.wsdl_cache_enabled',0);
 PhpWsdl::$CacheTime=0;
-
+if(isset($_SESSION["email"])) {
+    header('location: home/index.php');
+}
 if($_POST){
     controllaLogin();
 }
@@ -17,7 +15,11 @@ function controllaLogin(){
 	$soap= new SoapClient($wsdl);
 	global $risposta;
     $risposta = $soap->controlla_login($email,$password);
-    if($risposta == "Login verificato!"){
+    if($risposta[0] == "Login verificato!"){
+        session_start();
+        $_SESSION['email'] = $risposta[1];
+        $_SESSION['superuser'] = $risposta[2];
+        header('location: home/index.php');
     }
 }
 
@@ -25,37 +27,45 @@ function controllaLogin(){
 
 <html>
 	<head>
-		<!-- Latest compiled and minified CSS -->
-		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
-		<!-- Optional theme -->
-		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap-theme.min.css" integrity="sha384-fLW2N01lMqjakBkx3l/M9EahuwpSfeNvV63J5ezn3uZzapT0u7EYsXMjQV+0En5r" crossorigin="anonymous">
-		<!-- Latest compiled and minified JavaScript -->
-		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
-        <link rel="stylesheet" type="text/css" href="css/index.css">
+        <!-- Latest compiled and minified CSS -->
+        <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+        <!-- jQuery library -->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script>
+        <!-- Latest compiled JavaScript -->
+        <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+        <link rel="stylesheet" type="text/css" href="index.css">
 		<title>Login</title>
 	</head>
 	<body>
-        <div class="container logo">
-            <img src="logo.jpg"/>
-        </div>
-		<div class="container form">
-            <form role="form" method="post" action="#">
-                <div class="form-group" >
-                    <label for="email">Email:</label>
-                    <input name ="email" type="email" class="form-control" id="email" required>
-                <div class="form-group">
-                    <label for="pwd">Password:</label>
-                    <input name="password"type="password" class="form-control" id="pwd" required>
+		<div class="container">
+            <div class="row">
+                <div class="col-md-4">
                 </div>
-                <button type="submit" class="btn btn-default">Login</button>
-            </form>
+                <div class="col-md-4">
+                    <img src="logo.jpg" />
+                    <form role="form" method="post" action="">
+                        <div class="form-group" >
+                            <label for="email">Email:</label>
+                            <input name ="email" type="email" class="form-control" id="email" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="pwd">Password:</label>
+                            <input name="password"type="password" class="form-control" id="pwd" required>
+                        </div>
+                        <button type="submit" class="btn btn-default">Login</button>
+                    </form>
+                    <div class="risLogin" >
+                        <?php
+                        if($_POST){
+                            echo $risposta[0];
+                        }
+                        ?>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                </div>
+            </div>
 		</div>
-        <div class="cointainer risLogin" >
-            <?php
-                if($_POST){
-                    echo $risposta;
-                }
-            ?>
-        </div>
+
 	</body>
 </html>

@@ -15,7 +15,6 @@ CREATE TABLE Saed.Prodotto(
 	nome varchar(30) NOT NULL UNIQUE,
 	descrizione varchar(500),
 	immagine varchar(500),
-	quantitaDisponibile int,
 	prezzo decimal
 );
 
