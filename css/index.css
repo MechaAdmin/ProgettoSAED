@@ -1,0 +1,14 @@
+#email,#pwd{
+    width: 300px;
+}
+.logo{
+    text-align: center;
+}
+.form{
+    margin-left: 35%;
+
+}
+.risLogin{
+    font-weight: bold;
+    font-size: 15pt;
+}
