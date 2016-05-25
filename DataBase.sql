@@ -1,5 +1,5 @@
-CREATE SCHEMA Saed;
-CREATE TABLE Saed.Utente(
+CREATE SCHEMA IF NOT EXISTS Saed;
+CREATE TABLE IF NOT EXISTS Saed.Utente(
 	idUtente int AUTO_INCREMENT PRIMARY KEY,
 	email varchar(50) NOT NULL UNIQUE,
 	password varchar(30) NOT NULL,
@@ -10,7 +10,7 @@ CREATE TABLE Saed.Utente(
 	cap varchar(5),
 	superuser boolean
 );
-CREATE TABLE Saed.Prodotto(
+CREATE TABLE IF NOT EXISTS Saed.Prodotto(
 	idProdotto int AUTO_INCREMENT PRIMARY KEY,
 	nome varchar(30) NOT NULL UNIQUE,
 	descrizione varchar(500),
@@ -19,7 +19,7 @@ CREATE TABLE Saed.Prodotto(
 );
 
 
-CREATE TABLE Saed.Ordine(
+CREATE TABLE IF NOT EXISTS Saed.Ordine(
 	idOrdine int AUTO_INCREMENT PRIMARY KEY,
 	Utente varchar(50) NOT NULL REFERENCES Saed.Utente.email,
 	indirizzoSpedizione varchar(50);
@@ -27,7 +27,7 @@ CREATE TABLE Saed.Ordine(
 	totale decimal
 );
 
-CREATE TABLE Saed.Ordine_Prodotto(
+CREATE TABLE IF NOT EXISTS Saed.Ordine_Prodotto(
 	idOrdine int REFERENCES Saed.Ordine.idOrdine,
 	idProdotto int REFERENCES Saed.Prodotto.idProdotto,
 	quantita int,

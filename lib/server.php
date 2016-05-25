@@ -66,6 +66,28 @@ class servizio
         return $info;
     }
     /**
+     * aggiungi_Ordine_Prodotto
+     *
+     * @param int idOrdine
+     * @param string $nome
+     * @param int $quantita
+     */
+    public function aggiungi_Ordine_Prodotto($idOrdine,$nome,$quantita)
+    {
+        include_once("../home/php/connessione.php");
+        $sql = "INSERT INTO Ordine_Prodotto (idOrdine, nome, quantita)VALUES ('$idOrdine'''$nome', '$quantita')";
+
+        if (mysqli_query($con, $sql)) {
+            $info = "Ordine_Prodotto aggiunto correttamente";
+        } else {
+            $info =  "Errore: " . $sql . "<br>" . mysqli_error($con);
+        }
+        mysqli_close($con);
+        return $info;
+    }
+
+    
+    /**
      * visualizza_piatti
      *
      * @return Array Response string

@@ -73,7 +73,7 @@
                 </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-info btn-lg">Conferma Ordine</button>
-                <button type="button" class="btn btn-default" data-dismiss="modal">Esci</button>
+                <button type="button" class="btn btn-default" data-dismiss="modal" id="esciButton">Esci</button>
             </div>
         </div>
 

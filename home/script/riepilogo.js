@@ -1,6 +1,7 @@
 $( document ).ready(function() {
     $("#alert").hide();
     var riepilogoArray = [];
+
     $("#btnRiepilogo").click(function(e){
         e.preventDefault();
 
@@ -11,6 +12,11 @@ $( document ).ready(function() {
             var prezzoP = $(this).find("td:nth-child(4)").text();
             var quantitaP = $(this).find("td:nth-child(5)").children('input').val();
             if(quantitaP > 0){
+                for (var i = 0; i<riepilogoArray.length;i++){
+                    if (nomeP == riepilogoArray[i].nome){
+                        riepilogoArray.splice(i,1);
+                    }
+                }
                 num++;
                 spesaTotale = spesaTotale + parseFloat(quantitaP)*parseFloat(prezzoP);
                 var prodotto = {nome: nomeP, prezzo: prezzoP, quantita: quantitaP};
@@ -23,10 +29,17 @@ $( document ).ready(function() {
                 $("#bodyTabellaRiepilogo").append("<tr>"+"<td>"+ riepilogoArray[i]["nome"] +"</td>"+"<td>"+ riepilogoArray[i]["quantita"] +"</td>"+"<td>"+ riepilogoArray[i]["prezzo"] +"</td>"+"</tr>" );
             }
             $("#totaleRiepilogo").children().html(spesaTotale +"€");
-
+            
+            
+            
         }else{
             $("#alert").show().delay(3000).fadeOut();
         }
 
     });
+    $("#esciButton").click(function (e) {
+        e.preventDefault();
+        console.log("uscito");
+        $("#bodyTabellaRiepilogo").empty();
+    })
 });
