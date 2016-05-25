@@ -9,6 +9,7 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script>
     <!-- Latest compiled JavaScript -->
     <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+    <script src="../lib/bootstrap-filestyle.min.js"></script>
     <script src="script/aggiungi_piatti.js"></script>
 
 </head>
@@ -28,7 +29,7 @@
         </div>
         <div class="form-group">
             <label for="immagine">Immagine:</label>
-            <input type="file" name="immagine" id="immagine"  required/>
+            <input type="file" class="filestyle" data-input="false" name="immagine" id="immagine"  required/>
         </div>
 
         <button type="submit" class="btn btn-default">Aggiungi</button>
