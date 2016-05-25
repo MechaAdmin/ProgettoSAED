@@ -21,7 +21,7 @@ $( document ).ready(function() {
     });
     $("#nav_ordina").click(function(){
         $("li").removeClass("active");
-        //$(".contenitore").load( "aggiungi_piatti.php" );
+        $(".contenitore").load( "ordina.php" );
         $("#nav_ordina").parent().addClass("active");
     });
     $("#nav_visualizza_ordini").click(function(){
