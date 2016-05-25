@@ -105,6 +105,42 @@ class servizio
         mysqli_close($con);
         return $risultato;
     }
+    /**
+     * visualizza_ordini
+     *
+     * @return Array Response string
+     */
+    public function visualizza_ordini()
+    {
+        include_once("../home/php/connessione.php");
+        $sql = "SELECT * FROM Ordine ORDER BY data DESC";
+        $res = mysqli_query($con,$sql) or die('Query failed: ' . myisql_error($con));
+        $i=0;
+        while($row = mysqli_fetch_assoc($res)){
+            $risultato[$i] = $row;
+            $i++;
+        }
+        mysqli_close($con);
+        return $risultato;
+    }
+    /**
+     * visualizza_ordine_dettaglio
+     * @param int idOrdine
+     * @return Array Response string
+     */
+    public function visualizza_ordine_dettaglio($idOrdine)
+    {
+        include_once("../home/php/connessione.php");
+        $sql = "SELECT * FROM Ordine_prodotto WHERE idOrdine ='$idOrd'";
+        $res = mysqli_query($con,$sql) or die('Query failed: ' . myisql_error($con));
+        $i=0;
+        while($row = mysqli_fetch_assoc($res)){
+            $risultato[$i] = $row;
+            $i++;
+        }
+        mysqli_close($con);
+        return $risultato;
+    }
 
 }
 
