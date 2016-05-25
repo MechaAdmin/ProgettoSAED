@@ -5,11 +5,6 @@
     global $risposta;
     $risposta = $soap->info_utente($_SESSION["email"]);
 ?>
-<html>
-<head>
-
-</head>
-<body>
     <div class = "jumbotron">
         <h1>Benvenuto <?php echo $risposta[1]." ".$risposta[2] ?></h1>
         <?php
@@ -20,5 +15,3 @@
             }
         ?>
     </div>
-</body>
-</html>

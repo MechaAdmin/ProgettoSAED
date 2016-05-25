@@ -1,16 +1,8 @@
-<html>
-<head>
-    <!-- Latest compiled and minified CSS -->
-    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
-    <!-- jQuery library -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script>
-    <!-- Latest compiled JavaScript -->
-    <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
-    <script src="script/riepilogo.js"></script>
-</head>
-<body>
-<form id="riepilogoForm">
-<table id="tabellaRiepilogo" class="table table-striped">
+<script src="script/riepilogo.js"></script>
+<div class="alert alert-danger" id="alert">
+    <strong>Attenzione!</strong> Non puoi completare l'ordine senza aver scelto almeno un prodotto.
+</div>
+<table id="tabellaProdotti" class="table table-striped">
     <thead>
     <tr>
         <th>Immagine</th>
@@ -18,7 +10,6 @@
         <th>Descrizione</th>
         <th>Prezzo</th>
         <th>Quantit&agrave;</th>
-        <th>Seleziona</th>
     </tr>
     </thead>
     <tbody>
@@ -37,8 +28,7 @@
             <td><?php echo $row['nome']; ?></td>
             <td><?php echo $row['descrizione']; ?></td>
             <td><?php echo $row['prezzo']."€"; ?></td>
-            <td><input type="number" name="quantita" ></td>
-            <td><input type="checkbox" name="seleziona" value="selezionato"></td>
+            <td><input class="form-control" type="number" name="quantita" value="0" ></td>
         </tr>
         <?php
     }
@@ -46,7 +36,46 @@
 
     </tbody>
 </table>
-    <button type="submit" >Riepilogo</button>
-</form>
-</body>
-</html>
+
+<button type="button" class="btn btn-info btn-lg" id="btnRiepilogo">Riepilogo</button>
+<div id="modalRiepilogo" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Riepilogo Ordine</h4>
+            </div>
+            <div class="modal-body">
+                <table id="tabellaRiepilogo" class="table table-striped">
+                    <thead>
+                    <tr>
+                        <th>Nome</th>
+                        <th>Quantit&agrave;</th>
+                        <th>Prezzo</th>
+                    </tr>
+                    </thead>
+                    <tbody id="bodyTabellaRiepilogo">
+                        
+                    </tbody>
+                        <tfoot>
+                        <tr>
+                            <td colspan="2"><strong>Totale</strong></td>
+                            <td id="totaleRiepilogo"><strong></strong></td>
+                        </tr>
+                    </tfoot>
+                </table>
+            </div>
+                <div class="form-group" style="margin-left: 10px; margin-right: 10px">
+                    <label for="indirizzoSpedizione">Indirizzo Spedizione:</label>
+                    <input type="text"  class="form-control" name="indirizzoSpedizione" id="immagine"/>
+                </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-info btn-lg">Conferma Ordine</button>
+                <button type="button" class="btn btn-default" data-dismiss="modal">Esci</button>
+            </div>
+        </div>
+
+    </div>
+</div>

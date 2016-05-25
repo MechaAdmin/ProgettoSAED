@@ -21,14 +21,15 @@ CREATE TABLE Saed.Prodotto(
 
 CREATE TABLE Saed.Ordine(
 	idOrdine int AUTO_INCREMENT PRIMARY KEY,
-	idUtente int NOT NULL,
+	Utente varchar(50) NOT NULL REFERENCES Saed.Utente.email,
+	indirizzoSpedizione varchar(50);
 	data datetime,
 	totale decimal
 );
 
 CREATE TABLE Saed.Ordine_Prodotto(
-	idOrdine int,
-	idProdotto int,
+	idOrdine int REFERENCES Saed.Ordine.idOrdine,
+	idProdotto int REFERENCES Saed.Prodotto.idProdotto,
 	quantita int,
 	PRIMARY KEY(idOrdine, idProdotto)
 );

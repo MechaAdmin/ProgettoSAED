@@ -1,18 +1,32 @@
 $( document ).ready(function() {
-    $("#riepilogoForm").on('submit',(function(e) {
+    $("#alert").hide();
+    var riepilogoArray = [];
+    $("#btnRiepilogo").click(function(e){
         e.preventDefault();
-        var riepilogoArray = [];
-        $("#tabellaRiepilogo tr").each(function(){
+
+        var num = 0;
+        var spesaTotale = 0;
+        $("#tabellaProdotti tr").each(function(){
             var nomeP = $(this).find("td:nth-child(2)").text();
             var prezzoP = $(this).find("td:nth-child(4)").text();
-            var quantitaP = $(this).find("td:nth-child(5)").text();
-            if ($(this).find("td:nth-child(6)").checked()) {
+            var quantitaP = $(this).find("td:nth-child(5)").children('input').val();
+            if(quantitaP > 0){
+                num++;
+                spesaTotale = spesaTotale + parseFloat(quantitaP)*parseFloat(prezzoP);
                 var prodotto = {nome: nomeP, prezzo: prezzoP, quantita: quantitaP};
                 riepilogoArray.push(prodotto);
             }
         });
-        $(".contenitore").load( "riepilogo.php" );
+        if(num > 0){
+            $("#modalRiepilogo").modal("show");
+            for(var i = 0;i< riepilogoArray.length;i++){
+                $("#bodyTabellaRiepilogo").append("<tr>"+"<td>"+ riepilogoArray[i]["nome"] +"</td>"+"<td>"+ riepilogoArray[i]["quantita"] +"</td>"+"<td>"+ riepilogoArray[i]["prezzo"] +"</td>"+"</tr>" );
+            }
+            $("#totaleRiepilogo").children().html(spesaTotale +"€");
 
+        }else{
+            $("#alert").show().delay(3000).fadeOut();
+        }
 
-    }));
+    });
 });
