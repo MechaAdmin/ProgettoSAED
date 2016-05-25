@@ -56,19 +56,6 @@ class servizio
     {
         include_once("../home/php/connessione.php");
         $sql = "INSERT INTO Prodotto (nome, descrizione, immagine,prezzo)VALUES ('$nome', '$descrizione','$immagine' ,'$prezzo')";
-        $res = mysqli_query($con,$sql);
-        mysqli_close($con);
-        return $res;
-    }
-    /**
-     * visualizza_piatti
-     *
-     * @return string Response string
-     */
-    public function visualizza_piatti()
-    {
-        include_once("../home/php/connessione.php");
-        $sql = "SELECT * FROM Prodotto";
 
         if (mysqli_query($con, $sql)) {
             $info = "Prodotto aggiunto correttamente";
@@ -77,6 +64,24 @@ class servizio
         }
         mysqli_close($con);
         return $info;
+    }
+    /**
+     * visualizza_piatti
+     *
+     * @return Array Response string
+     */
+    public function visualizza_piatti()
+    {
+        include_once("../home/php/connessione.php");
+        $sql = "SELECT * FROM Prodotto";
+        $res = mysqli_query($con,$sql) or die('Query failed: ' . myisql_error($con));
+        $i=0;
+        while($row = mysqli_fetch_assoc($res)){
+            $risultato[$i] = $row;
+            $i++;
+        }
+        mysqli_close($con);
+        return $risultato;
     }
 
 }

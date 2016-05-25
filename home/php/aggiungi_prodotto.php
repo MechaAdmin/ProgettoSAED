@@ -27,6 +27,7 @@ if(isset($_FILES["immagine"]["type"]))
                 move_uploaded_file($sourcePath,$targetPath) ; // Moving Uploaded file
                 $wsdl="http://localhost/SAED/lib/cache/server.wsdl";
                 $soap= new SoapClient($wsdl);
+                $targetPath = $_FILES['immagine']['name'];
                 $risposta = $soap->aggiungi_piatto($_POST["nome"],$_POST["descrizione"],$_POST["prezzo"],$targetPath);
                 if($risposta != "Prodotto aggiunto correttamente"){
                     unlink($targetPath);

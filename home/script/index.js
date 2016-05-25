@@ -16,7 +16,7 @@ $( document ).ready(function() {
     });
     $("#nav_visualizza_piatti").click(function(){
         $("li").removeClass("active");
-        //$(".contenitore").load( "aggiungi_piatti.php" );
+        $(".contenitore").load( "visualizza_piatti.php" );
         $("#nav_visualizza_piatti").parent().addClass("active");
     });
     $("#nav_ordina").click(function(){
