@@ -7,7 +7,6 @@ $( document ).ready(function() {
         spesaTotale = 0;
         //riepilogoArray.slice(0,riepilogoArray.length);
         riepilogoArray.length = 0;
-        console.log(riepilogoArray);
         $("#bodyTabellaRiepilogo").empty();
         var num = 0;
 
@@ -17,11 +16,6 @@ $( document ).ready(function() {
             var prezzoP = $(this).find("td:nth-child(4)").text();
             var quantitaP = $(this).find("td:nth-child(5)").children('input').val();
             if(quantitaP > 0){
-                for (var i = 0; i<riepilogoArray.length;i++){
-                    if (nomeP == riepilogoArray[i].nome){
-                        riepilogoArray.splice(i,1);
-                    }
-                }
                 num++;
                 spesaTotale = spesaTotale + parseFloat(quantitaP)*parseFloat(prezzoP);
                 var prodotto = {idProdotto: idProdotto, nome: nomeP, prezzo: prezzoP, quantita: quantitaP};
