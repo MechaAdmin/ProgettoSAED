@@ -30,7 +30,7 @@ if(isset($_FILES["immagine"]["type"]))
                 $targetPath = $_FILES['immagine']['name'];
                 $risposta = $soap->aggiungi_piatto($_POST["nome"],$_POST["descrizione"],$_POST["prezzo"],$targetPath);
                 if($risposta != "Prodotto aggiunto correttamente"){
-                    unlink($targetPath);
+                    unlink("../immagini_prodotti/".$targetPath);
                 }
                 echo $risposta;
             }

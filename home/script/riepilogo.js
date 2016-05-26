@@ -1,13 +1,18 @@
 $( document ).ready(function() {
     $("#alert").hide();
     var riepilogoArray = [];
-
+    var spesaTotale = 0;
     $("#btnRiepilogo").click(function(e){
         e.preventDefault();
-
+        spesaTotale = 0;
+        //riepilogoArray.slice(0,riepilogoArray.length);
+        riepilogoArray.length = 0;
+        console.log(riepilogoArray);
+        $("#bodyTabellaRiepilogo").empty();
         var num = 0;
-        var spesaTotale = 0;
+
         $("#tabellaProdotti tr").each(function(){
+            var idProdotto = $(this).attr("id");
             var nomeP = $(this).find("td:nth-child(2)").text();
             var prezzoP = $(this).find("td:nth-child(4)").text();
             var quantitaP = $(this).find("td:nth-child(5)").children('input').val();
@@ -19,7 +24,7 @@ $( document ).ready(function() {
                 }
                 num++;
                 spesaTotale = spesaTotale + parseFloat(quantitaP)*parseFloat(prezzoP);
-                var prodotto = {nome: nomeP, prezzo: prezzoP, quantita: quantitaP};
+                var prodotto = {idProdotto: idProdotto, nome: nomeP, prezzo: prezzoP, quantita: quantitaP};
                 riepilogoArray.push(prodotto);
             }
         });
@@ -33,13 +38,31 @@ $( document ).ready(function() {
             
             
         }else{
-            $("#alert").show().delay(3000).fadeOut();
+            $("#alert").removeClass("alert-success").addClass("alert-danger").html("<strong>Attenzione!</strong> Non puoi completare l'ordine senza aver scelto almeno un prodotto.").show().delay(3000).fadeOut();
         }
 
     });
-    $("#esciButton").click(function (e) {
+    $("#confermaOrdine").click(function (e) {
         e.preventDefault();
-        console.log("uscito");
-        $("#bodyTabellaRiepilogo").empty();
+        var indirizzo = $("#indirizzoSpedizione").val();
+        $.ajax({
+            type     : "POST",
+            url      : "post.php",
+            data     : {riepilogo :riepilogoArray, indirizzo:indirizzo, totale:spesaTotale},
+            url: "php/aggiungi_ordine.php",
+            success: function(data) {
+                if (data == "Ordine Effettuato Correttamente") {
+                    $("#alert").removeClass("alert-danger").addClass("alert-success").html("<strong>Ordine Effettutato Correttamente!</strong>").show().delay(3000).fadeOut();
+
+                } else {
+                    $("#alert").removeClass("alert-success").addClass("alert-danger").html("<strong>Attenzione! </strong>"+data).show().delay(3000).fadeOut();
+                }
+            },
+            error:function () {
+                alert("Chiamata fallita,Riprovare");
+            }
+        });
     })
+
+
 });

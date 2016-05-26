@@ -21,15 +21,15 @@ CREATE TABLE IF NOT EXISTS Saed.Prodotto(
 
 CREATE TABLE IF NOT EXISTS Saed.Ordine(
 	idOrdine int AUTO_INCREMENT PRIMARY KEY,
-	Utente varchar(50) NOT NULL REFERENCES Saed.Utente.email,
-	indirizzoSpedizione varchar(50);
-	data datetime,
+	Utente varchar(50) NOT NULL REFERENCES Saed.Utente(email),
+	indirizzoSpedizione varchar(50),
+	data varchar(20),
 	totale decimal
 );
 
 CREATE TABLE IF NOT EXISTS Saed.Ordine_Prodotto(
-	idOrdine int REFERENCES Saed.Ordine.idOrdine,
-	idProdotto int REFERENCES Saed.Prodotto.idProdotto,
+	idOrdine int REFERENCES Saed.Ordine(idOrdine) ON DELETE CASCADE,
+	idProdotto int REFERENCES Saed.Prodotto(idProdotto) ON DELETE CASCADE,
 	quantita int,
 	PRIMARY KEY(idOrdine, idProdotto)
 );

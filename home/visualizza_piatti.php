@@ -18,7 +18,7 @@
         foreach ($risposta as $row) {
             ?>
             <tr>
-                <td><img width="250" height="250" class="img-responsive" src="<?php echo "immagini_prodotti/".$row['immagine']; ?>"/></td>
+                <td><img width="200" height="200" class="img-responsive" src="<?php echo "immagini_prodotti/".$row['immagine']; ?>"/></td>
                 <td><?php echo $row['nome']; ?></td>
                 <td><?php echo $row['descrizione']; ?></td>
                 <td><?php echo $row['prezzo']."€"; ?></td>

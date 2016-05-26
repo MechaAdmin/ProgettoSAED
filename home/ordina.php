@@ -1,7 +1,5 @@
 <script src="script/riepilogo.js"></script>
-<div class="alert alert-danger" id="alert">
-    <strong>Attenzione!</strong> Non puoi completare l'ordine senza aver scelto almeno un prodotto.
-</div>
+
 <table id="tabellaProdotti" class="table table-striped">
     <thead>
     <tr>
@@ -23,12 +21,12 @@
 
     foreach ($risposta as $row) {
         ?>
-        <tr>
+        <tr id="<?php  echo $row['idProdotto'];  ?>">
             <td><img width="200" height="200" class="img-responsive" src="<?php echo "immagini_prodotti/".$row['immagine']; ?>"></td>
             <td><?php echo $row['nome']; ?></td>
             <td><?php echo $row['descrizione']; ?></td>
             <td><?php echo $row['prezzo']."€"; ?></td>
-            <td><input class="form-control" type="number" name="quantita" value="0" ></td>
+            <td><input class="form-control" type="number" name="quantita" value="0" min="0" ></td>
         </tr>
         <?php
     }
@@ -38,6 +36,12 @@
 </table>
 
 <button type="button" class="btn btn-info btn-lg" id="btnRiepilogo">Riepilogo</button>
+<div class="alert" id="alert" style="margin-top: 10px">
+
+</div>
+<!--<div class="alert alert-success" role="alert">-->
+<!--    <strong>Well done!</strong> You successfully read this important alert message.-->
+<!--</div>-->
 <div id="modalRiepilogo" class="modal fade" role="dialog">
     <div class="modal-dialog">
 
@@ -69,10 +73,10 @@
             </div>
                 <div class="form-group" style="margin-left: 10px; margin-right: 10px">
                     <label for="indirizzoSpedizione">Indirizzo Spedizione:</label>
-                    <input type="text"  class="form-control" name="indirizzoSpedizione" id="immagine"/>
+                    <input type="text"  class="form-control" id="indirizzoSpedizione"/>
                 </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-info btn-lg">Conferma Ordine</button>
+                <button type="button" class="btn btn-info btn-lg" id="confermaOrdine">Conferma Ordine</button>
                 <button type="button" class="btn btn-default" data-dismiss="modal" id="esciButton">Esci</button>
             </div>
         </div>

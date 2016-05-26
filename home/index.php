@@ -8,7 +8,7 @@
 
         <script src="script/index.js"></script>
     </head>
-    <body>
+    <body style="margin-bottom: 80px">
 
 
     <?php

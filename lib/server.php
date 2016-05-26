@@ -66,19 +66,36 @@ class servizio
         return $info;
     }
     /**
-     * aggiungi_Ordine_Prodotto
+     * aggiungi_Ordine
      *
-     * @param int idOrdine
-     * @param string $nome
-     * @param int $quantita
+     * @param String $utente mail dell'utente
+     * @param string $indirizzoSpedizione
+     * @param string $data
+     * @param string $totale
+     * @param Array of Object $riepilogo
+     * @return string Response string
      */
-    public function aggiungi_Ordine_Prodotto($idOrdine,$nome,$quantita)
+    public function aggiungi_Ordine($utente,$indirizzoSpedizione,$data,$totale,$riepilogo)
     {
         include_once("../home/php/connessione.php");
-        $sql = "INSERT INTO Ordine_Prodotto (idOrdine, nome, quantita)VALUES ('$idOrdine'''$nome', '$quantita')";
-
+        $sql = "INSERT INTO Ordine VALUES (NULL,'$utente','$indirizzoSpedizione', '$data','$totale')";
         if (mysqli_query($con, $sql)) {
-            $info = "Ordine_Prodotto aggiunto correttamente";
+            $idOrdine = mysqli_insert_id($con);
+            foreach($riepilogo as $value){
+                $idProdotto =  $value["idProdotto"];
+                $quantita =  $value["quantita"];
+                $sql = "INSERT INTO Ordine_Prodotto (idOrdine, idProdotto, quantita)VALUES ('$idOrdine','$idProdotto', '$quantita')";
+                if(mysqli_query($con,$sql )){
+                    $info = "Ordine Effettuato Correttamente";
+                }else {
+                    $sql = "DELETE FROM Ordine WHERE idOrdine = '$idOrdine'";
+                    if(mysqli_query($con,$sql)){
+                        $info = "Errore nel completamento dell'ordine,Riprovare";
+                    }else{
+                        $info =  "Errore: " . $sql . "<br>" . mysqli_error($con);
+                    }
+                }
+            }
         } else {
             $info =  "Errore: " . $sql . "<br>" . mysqli_error($con);
         }
