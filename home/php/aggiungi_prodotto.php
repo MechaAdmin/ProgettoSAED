@@ -38,7 +38,7 @@ if(isset($_FILES["immagine"]["type"]))
     }
     else
     {
-        echo "<span id='invalid'>***Invalid file Size or Type***<span>";
+        echo "Formato Immagine non valido oppure Immagine troppo grande";
     }
 }
 ?>
