@@ -1,11 +1,11 @@
 $( document ).ready(function() {
     $("#alert").hide();
+    $("#alertIndirizzo").hide();
     var riepilogoArray = [];
     var spesaTotale = 0;
     $("#btnRiepilogo").click(function(e){
         e.preventDefault();
         spesaTotale = 0;
-        //riepilogoArray.slice(0,riepilogoArray.length);
         riepilogoArray.length = 0;
         $("#bodyTabellaRiepilogo").empty();
         var num = 0;
@@ -28,9 +28,6 @@ $( document ).ready(function() {
                 $("#bodyTabellaRiepilogo").append("<tr>"+"<td>"+ riepilogoArray[i]["nome"] +"</td>"+"<td>"+ riepilogoArray[i]["quantita"] +"</td>"+"<td>"+ riepilogoArray[i]["prezzo"] +"</td>"+"</tr>" );
             }
             $("#totaleRiepilogo").children().html(spesaTotale +"€");
-            
-            
-            
         }else{
             $("#alert").removeClass("alert-success").addClass("alert-danger").html("<strong>Attenzione!</strong> Non puoi completare l'ordine senza aver scelto almeno un prodotto.").show().delay(3000).fadeOut();
         }
@@ -39,12 +36,12 @@ $( document ).ready(function() {
     $("#confermaOrdine").click(function (e) {
         e.preventDefault();
         var indirizzo = $("#indirizzoSpedizione").val();
-        if(indirizzo == null){
+        if(indirizzo == ""){
+            $("#alertIndirizzo").show().delay(3000).fadeOut();
             return false;
         }
         $.ajax({
             type     : "POST",
-            url      : "post.php",
             data     : {riepilogo :riepilogoArray, indirizzo:indirizzo, totale:spesaTotale},
             url: "php/aggiungi_ordine.php",
             success: function(data) {

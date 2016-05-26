@@ -4,7 +4,7 @@ ini_set('soap.wsdl_cache_enabled',0);
 PhpWsdl::$CacheTime=0;
 $wsdl="http://localhost/SAED/lib/cache/server.wsdl";
 $soap= new SoapClient($wsdl);
-$idOrdine = $_GET["idOrdine"];
+$idOrdine = $_POST["idOrdine"];
 $risposta = $soap->visualizza_ordine_dettaglio($idOrdine);
-return $risposta;
+echo $risposta;
 ?>

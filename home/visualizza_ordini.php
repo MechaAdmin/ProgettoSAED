@@ -1,4 +1,5 @@
 <script src="script/riepilogo.js"></script>
+<script src="script/dettaglio_ordine.js"></script>
 <table class="table table-striped" id="tabella_ordini">
     <thead>
     <tr>
@@ -19,9 +20,9 @@
     foreach ($risposta as $row) {
         ?>
         <tr>
-            <td><?php echo $row['idOrdine']; ?>"/></td>
-            <td><?php echo $row['idUtente']; ?></td>
-            <td><?php echo $row['data']; ?></td>
+            <td><?php echo $row['idOrdine']; ?></td>
+            <td><?php echo $row['Utente']; ?></td>
+            <td><?php echo $row['data']; ?> </td>
             <td><?php echo $row['totale']."€"; ?></td>
         </tr>
         <?php

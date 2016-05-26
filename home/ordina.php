@@ -39,9 +39,6 @@
 <div class="alert" id="alert" style="margin-top: 10px">
 
 </div>
-<!--<div class="alert alert-success" role="alert">-->
-<!--    <strong>Well done!</strong> You successfully read this important alert message.-->
-<!--</div>-->
 <div id="modalRiepilogo" class="modal fade" role="dialog">
     <div class="modal-dialog">
 
@@ -71,14 +68,18 @@
                     </tfoot>
                 </table>
             </div>
-                <div class="form-group" style="margin-left: 10px; margin-right: 10px">
-                    <label for="indirizzoSpedizione">Indirizzo Spedizione:</label>
-                    <input type="text"  class="form-control" id="indirizzoSpedizione"/>
-                </div>
+            <div class="form-group" style="margin-left: 10px; margin-right: 10px">
+                <label for="indirizzoSpedizione">Indirizzo Spedizione:</label>
+                <input type="text"  class="form-control" id="indirizzoSpedizione"/>
+            </div>
+            <div class="alert alert-danger" id="alertIndirizzo" style="margin: 10px">
+                <strong>Attenzione!</strong> Devi inserire un indirizzo di spedizione!
+            </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-info btn-lg" id="confermaOrdine">Conferma Ordine</button>
                 <button type="button" class="btn btn-default" data-dismiss="modal" id="esciButton">Esci</button>
             </div>
+
         </div>
 
     </div>

@@ -113,7 +113,7 @@ class servizio
     {
         include_once("../home/php/connessione.php");
         $sql = "SELECT * FROM Prodotto";
-        $res = mysqli_query($con,$sql) or die('Query failed: ' . myisql_error($con));
+        $res = mysqli_query($con,$sql) or die('Query failed: ' . mysqli_error($con));
         $i=0;
         while($row = mysqli_fetch_assoc($res)){
             $risultato[$i] = $row;
@@ -131,7 +131,7 @@ class servizio
     {
         include_once("../home/php/connessione.php");
         $sql = "SELECT * FROM Ordine ORDER BY data DESC";
-        $res = mysqli_query($con,$sql) or die('Query failed: ' . myisql_error($con));
+        $res = mysqli_query($con,$sql) or die('Query failed: ' . mysqli_error($con));
         $i=0;
         while($row = mysqli_fetch_assoc($res)){
             $risultato[$i] = $row;
@@ -148,8 +148,8 @@ class servizio
     public function visualizza_ordine_dettaglio($idOrdine)
     {
         include_once("../home/php/connessione.php");
-        $sql = "SELECT * FROM Ordine_prodotto WHERE idOrdine ='$idOrd'";
-        $res = mysqli_query($con,$sql) or die('Query failed: ' . myisql_error($con));
+        $sql = "SELECT * FROM Ordine_prodotto WHERE idOrdine ='$idOrdine'";
+        $res = mysqli_query($con,$sql) or die('Query failed: ' . mysqli_error($con));
         $i=0;
         while($row = mysqli_fetch_assoc($res)){
             $risultato[$i] = $row;
