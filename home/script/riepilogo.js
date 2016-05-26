@@ -39,6 +39,9 @@ $( document ).ready(function() {
     $("#confermaOrdine").click(function (e) {
         e.preventDefault();
         var indirizzo = $("#indirizzoSpedizione").val();
+        if(indirizzo == null){
+            return false;
+        }
         $.ajax({
             type     : "POST",
             url      : "post.php",
@@ -47,10 +50,13 @@ $( document ).ready(function() {
             success: function(data) {
                 if (data == "Ordine Effettuato Correttamente") {
                     $("#alert").removeClass("alert-danger").addClass("alert-success").html("<strong>Ordine Effettutato Correttamente!</strong>").show().delay(3000).fadeOut();
-
+                    $("#tabellaProdotti tr").each(function(){
+                        $(this).find("td:nth-child(5)").children('input').val(0);
+                    });
                 } else {
                     $("#alert").removeClass("alert-success").addClass("alert-danger").html("<strong>Attenzione! </strong>"+data).show().delay(3000).fadeOut();
                 }
+                $("#modalRiepilogo").modal("hide");
             },
             error:function () {
                 alert("Chiamata fallita,Riprovare");

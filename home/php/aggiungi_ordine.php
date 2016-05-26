@@ -5,7 +5,6 @@ if (isset($_POST["riepilogo"])){
     $totale = $_POST["totale"];
     $oggi = getdate();
     $data = $oggi["mday"]."/".$oggi["mon"]."/".$oggi["year"]. " ".$oggi["hours"].":".$oggi["minutes"];
-    //$a = $riepilogo[0]["idProdotto"];
     session_start();
     $mail = $_SESSION["email"];
     session_abort();
