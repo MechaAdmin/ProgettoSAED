@@ -6,5 +6,6 @@ $wsdl="http://localhost/SAED/lib/cache/server.wsdl";
 $soap= new SoapClient($wsdl);
 $idOrdine = $_POST["idOrdine"];
 $risposta = $soap->visualizza_ordine_dettaglio($idOrdine);
-echo $risposta;
+echo json_encode($risposta);
+
 ?>

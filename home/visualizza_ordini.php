@@ -1,4 +1,3 @@
-<script src="script/riepilogo.js"></script>
 <script src="script/dettaglio_ordine.js"></script>
 <table class="table table-striped" id="tabella_ordini">
     <thead>
@@ -6,6 +5,7 @@
         <th>Numero Ordine</th>
         <th>Cliente</th>
         <th>Data</th>
+        <th>Indirizzo Spedizione</th>
         <th>Totale</th>
     </tr>
     </thead>
@@ -23,6 +23,7 @@
             <td><?php echo $row['idOrdine']; ?></td>
             <td><?php echo $row['Utente']; ?></td>
             <td><?php echo $row['data']; ?> </td>
+            <td><?php echo $row['indirizzoSpedizione']; ?> </td>
             <td><?php echo $row['totale']."€"; ?></td>
         </tr>
         <?php
@@ -30,7 +31,7 @@
     ?>
     </tbody>
 </table>
-<div id="modalRiepilogoOrdine" class="modal fade" role="dialog">
+<div id="modalDettaglioOrdine" class="modal fade" role="dialog">
     <div class="modal-dialog">
 
         <!-- Modal content-->
@@ -40,7 +41,7 @@
                 <h4 class="modal-title">Riepilogo Ordine</h4>
             </div>
             <div class="modal-body">
-                <table id="tabellaRiepilogo" class="table table-striped">
+                <table id="tabellaDettaglioOrdine" class="table table-striped">
                     <thead>
                     <tr>
                         <th>Nome</th>
@@ -48,19 +49,13 @@
                         <th>Prezzo</th>
                     </tr>
                     </thead>
-                    <tbody id="bodyTabellaRiepilogo">
-
+                    <tbody id="BodytabellaDettaglioOrdine">
+                
                     </tbody>
-                    <tfoot>
-                    <tr>
-                        <td colspan="2"><strong>Totale</strong></td>
-                        <td id="totaleRiepilogo"><strong></strong></td>
-                    </tr>
-                    </tfoot>
                 </table>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-info btn-lg">Chiudi</button>
+                <button type="button" class="btn btn-info btn-lg" data-dismiss="modal">Chiudi</button>
             </div>
         </div>
 

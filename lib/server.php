@@ -130,7 +130,7 @@ class servizio
     public function visualizza_ordini()
     {
         include_once("../home/php/connessione.php");
-        $sql = "SELECT * FROM Ordine ORDER BY data DESC";
+        $sql = "SELECT * FROM Ordine ORDER BY idOrdine DESC";
         $res = mysqli_query($con,$sql) or die('Query failed: ' . mysqli_error($con));
         $i=0;
         while($row = mysqli_fetch_assoc($res)){
@@ -142,18 +142,21 @@ class servizio
     }
     /**
      * visualizza_ordine_dettaglio
-     * @param int idOrdine
+     * @param int $idOrdine
      * @return Array Response string
      */
     public function visualizza_ordine_dettaglio($idOrdine)
     {
         include_once("../home/php/connessione.php");
-        $sql = "SELECT * FROM Ordine_prodotto WHERE idOrdine ='$idOrdine'";
-        $res = mysqli_query($con,$sql) or die('Query failed: ' . mysqli_error($con));
-        $i=0;
-        while($row = mysqli_fetch_assoc($res)){
-            $risultato[$i] = $row;
-            $i++;
+        $sql = "SELECT idOrdine,nome,quantita,prezzo FROM Ordine_Prodotto JOIN Prodotto ON Ordine_Prodotto.idProdotto = Prodotto.idProdotto WHERE idOrdine ='$idOrdine'";
+        if ($res = mysqli_query($con, $sql)) {
+            $i=0;
+            while($row = mysqli_fetch_assoc($res)){
+                $risultato[$i] = $row;
+                $i++;
+            }
+        }else{
+            $risultato = mysqli_error($con);
         }
         mysqli_close($con);
         return $risultato;
