@@ -29,6 +29,7 @@ if(isset($_FILES["immagine"]["type"]))
                 $soap= new SoapClient($wsdl);
                 $targetPath = $_FILES['immagine']['name'];
                 $risposta = $soap->aggiungi_piatto($_POST["nome"],$_POST["descrizione"],$_POST["prezzo"],$targetPath);
+
                 if($risposta != "Prodotto aggiunto correttamente"){
                     unlink("../immagini_prodotti/".$targetPath);
                 }

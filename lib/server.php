@@ -7,6 +7,32 @@
 class servizio
 {
     /**
+     * registrazione
+     *
+     * @param string $email
+     * @param string $password
+     * @param string $nome
+     * @param string $cognome
+     * @param string $indirizzo
+     * @param string $citta
+     * @param string $cap
+     * @return string Response string
+     */
+    public function registrazione($email,$password,$nome,$cognome,$indirizzo,$citta,$cap)
+    {
+        include_once("../home/php/connessione.php");
+        $sql = "INSERT INTO Utente (email, password, nome, cognome, indirizzo, citta, cap, superuser)VALUES ('$email','$password',
+                                    '$nome', '$cognome','$indirizzo' ,'$citta', '$cap','0')";
+
+        if (mysqli_query($con, $sql)) {
+            $info = "Registrato";
+        } else {
+            $info =  "Errore: " . $sql . "<br>" . mysqli_error($con);
+        }
+        mysqli_close($con);
+        return $info;
+    }
+    /**
      * controlla_login
      *
      * @param string $email
@@ -65,6 +91,7 @@ class servizio
         mysqli_close($con);
         return $info;
     }
+    
     /**
      * aggiungi_Ordine
      *
