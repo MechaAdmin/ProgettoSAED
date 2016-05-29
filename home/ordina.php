@@ -37,7 +37,6 @@
 
 <button type="button" class="btn btn-info btn-lg" id="btnRiepilogo">Riepilogo</button>
 <div class="alert" id="alert" style="margin-top: 10px">
-
 </div>
 <div id="modalRiepilogo" class="modal fade" role="dialog">
     <div class="modal-dialog">

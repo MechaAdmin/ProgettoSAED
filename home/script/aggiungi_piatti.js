@@ -11,11 +11,11 @@ $( document ).ready(function() {
             success: function(data)   // A function to be called if request succeeds
             {
                 if(data == "Prodotto aggiunto correttamente"){
-                    $(".ris").css({"color": "Green", "font-size": "15pt","font-weight": "bold"});
+                    $("#alert").removeClass("alert-danger").addClass("alert-success").html("<strong>"+data+"</strong>").show().delay(3000).fadeOut();
+                    document.getElementById("form_aggiungi_piatti").reset();
                 }else{
-                    $(".ris").css({"color": "Red", "font-size": "15pt","font-weight": "bold"});
+                    $("#alert").removeClass("alert-success").addClass("alert-danger").html("<strong>"+data+"</strong>").show().delay(3000).fadeOut();
                 }
-                $(".ris").text(data);
 
             }
         });
