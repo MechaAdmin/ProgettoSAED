@@ -19,6 +19,8 @@ function controllaLogin(){
         session_start();
         $_SESSION['email'] = $risposta[1];
         $_SESSION['superuser'] = $risposta[2];
+        $_SESSION['indirizzo'] = $risposta[3];
+        $_SESSION['citta'] = $risposta[4];
         header('location: home/index.php');
     }
 }

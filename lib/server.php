@@ -45,7 +45,7 @@ class servizio
         $sql = "SELECT * FROM Utente WHERE email ='$email' AND password='$password'";
         $check = mysqli_fetch_array(mysqli_query($con, $sql));
         if(isset($check)) {
-            $stato = array("Login verificato!",$check["email"],$check["superuser"]);
+            $stato = array("Login verificato!",$check["email"],$check["superuser"],$check["indirizzo"],$check["citta"]);
         } else {
             $stato = array("Email o password errati!","","");
         }

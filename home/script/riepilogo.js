@@ -32,6 +32,8 @@ $( document ).ready(function() {
             $("#alert").removeClass("alert-success").addClass("alert-danger").html("<strong>Attenzione!</strong> Non puoi completare l'ordine senza aver scelto almeno un prodotto.").show().delay(3000).fadeOut();
         }
 
+        
+
     });
     $("#confermaOrdine").click(function (e) {
         e.preventDefault();
