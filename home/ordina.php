@@ -1,5 +1,7 @@
 <script src="script/riepilogo.js"></script>
-
+<?php
+session_start();
+?>
 <table id="tabellaProdotti" class="table table-striped">
     <thead>
     <tr>
@@ -69,7 +71,7 @@
             </div>
             <div class="form-group" style="margin-left: 10px; margin-right: 10px">
                 <label for="indirizzoSpedizione">Indirizzo Spedizione:</label>
-                <input type="text" value="<?php session_start(); echo $_SESSION['indirizzo']."  ".$_SESSION['citta']; ?>"
+                <input type="text" value="<?php echo $_SESSION['indirizzo']."  ".$_SESSION['citta']; ?>"
                        class="form-control" id="indirizzoSpedizione"/>
             </div>
             <div class="alert alert-danger" id="alertIndirizzo" style="margin: 10px">
